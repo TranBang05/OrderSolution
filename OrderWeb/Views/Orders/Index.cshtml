@@ -1,0 +1,50 @@
+﻿@model OrderFilterViewModel
+
+<form method="get">
+    <select name="customerName">
+        <option value="">-- Chọn Khách hàng --</option>
+        @foreach (var customer in Model.Customers)
+        {
+            var isSelected = customer.CompanyName == Model.SelectedCustomerName ? "selected" : "";
+            <option value="@customer.CompanyName" selected="@isSelected">@customer.CompanyName</option>
+        }
+    </select>
+
+
+    <select name="employeeName">
+        <option value="">-- Select Employee --</option>
+        @foreach (var employee in Model.Employees)
+        {
+            var isSelected = employee.LastName == Model.SelectedEmployeeName ? "selected" : "";
+            <option value="@employee.LastName" selected="@isSelected">@employee.LastName</option>
+        }
+    </select>
+
+    <input type="date" name="startDate" value="@Model.StartDate?.ToString("yyyy-MM-dd")" placeholder="Start Date" />
+    <input type="date" name="endDate" value="@Model.EndDate?.ToString("yyyy-MM-dd")" placeholder="End Date" />
+    
+  
+    <button type="submit">Filter</button>
+</form>
+
+<table>
+    <thead>
+        <tr>
+            <th>Customer Name</th>
+            <th>Employee Name</th>
+            <th>Order Date</th>
+            <!-- Các cột khác -->
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var order in Model.Orders)
+        {
+            <tr>
+                <td>@order.CustomerName</td>
+                <td>@order.EmployName</td>
+                <td>@order.OrderDate</td>
+                <!-- Các cột khác -->
+            </tr>
+        }
+    </tbody>
+</table>

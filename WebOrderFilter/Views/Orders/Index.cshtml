@@ -1,0 +1,92 @@
+﻿<div style="display: flex;">
+    <div style="flex: 1; margin-right: 20px;">
+        <form method="get" asp-controller="Orders" asp-action="Index">
+            <label for="customerName">Customer Name:</label>
+            <select name="customerName">
+                <option value=""> Select Customer </option>
+                @if (ViewBag.CustomerNames != null)
+                {
+                    foreach (var customerName in ViewBag.CustomerNames)
+                    {
+                        <option value="@customerName">@customerName</option>
+                    }
+                }
+            </select>
+
+            <label for="employeeName">Employee Name:</label>
+            <br>
+            <select name="employeeName">
+                <option value=""> Select Employee </option>
+                @if (ViewBag.EmployeeNames != null)
+                {
+                    foreach (var employeeName in ViewBag.EmployeeNames)
+                    {
+                        <option value="@employeeName">@employeeName</option>
+                    }
+                }
+            </select>
+            <br>
+
+           
+            <label for="startDate">Start Date:</label>
+            <input type="date" name="startDate" id="startDate">
+            <br />
+            <label for="endDate">End Date:</label>
+            <input type="date" name="endDate" id="endDate">
+            <br>
+
+
+            <label for="sortOrder">Sort by Order Date:</label>
+            <select name="sortOrder" id="sortOrder">
+                <option value=""> Select Sort Order </option>
+                <option value="asc">Ascending</option>
+                <option value="desc">Descending</option>
+            </select>
+
+
+
+            <button type="submit">Filter</button>
+        </form>
+    </div>
+    <div style="flex: 2;">
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Customer Name</th>
+                    <th>Employee Name</th>
+                    <th>Order Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var order in Model)
+                {
+                    <tr>
+                        <td>@order.OrderId</td>
+                        <td>@order.CustomerName</td>
+                        <td>@order.EmployName</td>
+                        <td>@order.OrderDate</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<style>
+    .styled-table th {
+        background-color: #f2f2f2;
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    .styled-table tr {
+        border: 1px solid #ddd;
+    }
+
+    .styled-table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+</style>
